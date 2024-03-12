@@ -1,16 +1,14 @@
-# This is a sample Python script.
+import qrcode
+from PIL import Image
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+qr_data = input("Enter data: ")
+qr_background_color = input("what color would you like the background to be: ")
+qr_fill_color = input("what color do you want the qr code to be:  ")
+qr_file_name = input("how to save your file: ")
+qr_file_name_and_extension = qr_file_name + ".png"
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=10, border=4)
+qr.add_data(qr_data)
+qr.make(fit=True)
+img = qr.make_image(fill_color=qr_fill_color, back_color=qr_background_color)
+img.save(qr_file_name_and_extension)
